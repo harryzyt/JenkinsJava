@@ -1,21 +1,22 @@
-name: Trigger Jenkins Deployment
+name: Trigger Jenkins Job
 
 on:
   push:
     branches:
-      - main  # or your working branch
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Trigger Jenkins Job via API
+      - name: Trigger Jenkins via CURL
         run: |
-          echo "Triggering Jenkins job..."
+          echo "Triggering Jenkins Job..."
           curl -X POST "$JENKINS_URL/job/deploy-java-app/build" \
             --user "$JENKINS_USER:$JENKINS_TOKEN"
         env:
+          JENKINS_URL: ${{ secrets.JENKINS_URL }}
           JENKINS_USER: ${{ secrets.JENKINS_USER }}
           JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
-          JENKINS_URL: ${{ secrets.JENKINS_URL }}
+
