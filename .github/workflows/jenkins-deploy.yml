@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Trigger Jenkins via CURL
         run: |
-          echo "Triggering Jenkins Job..."
+          echo "Triggering Jenkins job..."
           curl -X POST "$JENKINS_URL/job/deploy-java-app/build" \
             --user "$JENKINS_USER:$JENKINS_TOKEN"
         env:
