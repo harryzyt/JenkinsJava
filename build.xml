@@ -1,0 +1,40 @@
+<project name="SimpleJavaApp" basedir="." default="war">
+
+  <!-- Project Properties -->
+  <property name="src" value="src"/>
+  <property name="web" value="web"/>
+  <property name="build" value="build"/>
+  <property name="dist" value="dist"/>
+  <property name="lib" value="lib"/>
+
+  <!-- Clean up previous builds -->
+  <target name="clean">
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+
+  <!-- Compile Java Source Files -->
+  <target name="compile">
+    <mkdir dir="${build}/WEB-INF/classes"/>
+
+    <javac srcdir="${src}/main/java" destdir="${build}/WEB-INF/classes" includeantruntime="false">
+      <classpath>
+        <fileset dir="${lib}" includes="**/*.jar"/>
+      </classpath>
+    </javac>
+
+    <!-- Copy non-Java resources (like web.xml) -->
+    <copy todir="${build}/WEB-INF">
+      <fileset dir="${web}/WEB-INF"/>
+    </copy>
+  </target>
+
+  <!-- Package into WAR file -->
+  <target name="war" depends="compile">
+    <mkdir dir="${dist}"/>
+    <war destfile="${dist}/SimpleJavaApp.war"
+         webxml="${web}/WEB-INF/web.xml"
+         basedir="${build}"/>
+  </target>
+
+</project>
