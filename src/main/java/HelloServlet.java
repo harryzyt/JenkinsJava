@@ -7,6 +7,6 @@ public class HelloServlet extends HttpServlet {
       throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        out.println("<h3>DevOps Foundations: Version Control and CI/CD with Jenkins</h3>");
+        out.println("Version Control and CI/CD with Jenkins");
     }
 }
